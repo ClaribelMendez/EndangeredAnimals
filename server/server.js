@@ -31,11 +31,11 @@ app.get('/api/animals', cors(), async (req, res) => {
 
 //create the POST request
 app.post('/api/animals', cors(), async (req, res) => {
-    const newUser = { firstname: req.body.firstname, lastname: req.body.lastname }
-    console.log([newUser.firstname, newUser.lastname]);
+    const newAnimal = { commonname: req.body.commonname, scientificname: req.body.scientificname}
+     console.log([newAnimal.commonname, newAnimal.scientificname]);
     const result = await db.query(
-        'INSERT INTO students(firstname, lastname) VALUES($1, $2) RETURNING *',
-        [newUser.firstname, newUser.lastname]
+        'INSERT INTO animals(commonname, scientificname) VALUES($1, $2) RETURNING *',
+        [newAnimal.commonname, newAnimal.scientificname]
     );
     console.log(result.rows[0]);
     res.json(result.rows[0]);
