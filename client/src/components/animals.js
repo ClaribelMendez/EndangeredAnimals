@@ -9,8 +9,8 @@ function Animals() {
         fetch("http://localhost:4002/api/animals")
         .then((response) => response.json())
         .then(animals =>{
-            //setStudents((students[3]));
-            //console.log("Testing", typeof students);
+            //setAnials((animals[3]));
+            //console.log("Testing", typeof animals);
             for (let index in animals){
                if( index !== "3"){
                    setAnimals(animals);
@@ -23,8 +23,8 @@ function Animals() {
     
 
     const addAnimal = (newAnimal) => {
-        //console.log(newStudent);
-        //postStudent(newStudent);
+        //console.log(newAnimal);
+        //postStudent(newAnimal);
         setAnimals((animals) => [...animals, newAnimal]);
     }
 
@@ -34,7 +34,7 @@ function Animals() {
         <h2> List of Animals </h2>
         <ul>
             {animals.map(animal =>
-                <li key={animal.id}> {animal.commonname} {animal.scientificname}</li>)}
+                <li key={animal.id}> {animal.commonname} {animal.scientificname} {animal.numbersinthewild} {animal.conservationstatuscode}</li>)}
         </ul>
         <Form addAnimal={addAnimal} />
       </div>

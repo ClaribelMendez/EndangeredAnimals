@@ -4,6 +4,9 @@ const Form = (props) => {
     const [animal, setAnimal] = useState({
         commonname: "",
         scientificname: "",
+        numbersinthewild: "",
+        conservationstatuscode: ""
+        // timestamp ***make sure to add these***
     
     });
 
@@ -14,9 +17,23 @@ const Form = (props) => {
 
     }
 
-    const handleLastnameChange = (event) => {
+    const handleScientificNameChange = (event) => {
         const scientificname = event.target.value;
         setAnimal((animal) => ({ ...animal, scientificname }));
+
+    }
+
+
+    const handleNumbersInTheWildChange = (event) => {
+        const numbersinthewild = event.target.value;
+        setAnimal((animal) => ({ ...animal, numbersinthewild }));
+
+    }
+
+
+    const handleConservationStatusChange = (event) => {
+        const conservationstatuscode = event.target.value;
+        setAnimal((animal) => ({ ...animal, conservationstatuscode }));
 
     }
 
@@ -36,10 +53,12 @@ const Form = (props) => {
         let resetState = {
             commonname: "",
             scientificname: "",
+            numbersinthewild: "",
+            conservationstatuscode: ""
         }
         e.preventDefault();
         postAnimal(animal);
-        // setAnimal(animal)
+        setAnimal(animal)
         setAnimal(resetState)
         
     };
@@ -61,10 +80,28 @@ const Form = (props) => {
                 <input
                     type="text"
                     id="add-scientificname"
-                    placeholder="Last Name"
+                    placeholder="Scientific Name"
                     required
                     value={animal.scientificname}
-                    onChange={handleLastnameChange}
+                    onChange={handleScientificNameChange}
+                />
+                     <label> Numbers In Wild </label>
+                <input
+                    type="number"
+                    id="add-numbersinthewild"
+                    placeholder="Numbers In The Wild"
+                    // required
+                    value={animal.numbersinthewild}
+                    onChange={handleNumbersInTheWildChange}
+                />
+                     <label>Conservation Status Code</label>
+                <input
+                    type="text"
+                    id="add-conservationstatuscode"
+                    placeholder="Conservation Status Code"
+                    // required
+                    value={animal.conservationstatuscode}
+                    onChange={handleConservationStatusChange}
                 />
             </fieldset>
             <button type="submit">Add</button>
