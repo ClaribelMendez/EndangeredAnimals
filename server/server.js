@@ -32,7 +32,7 @@ app.get('/api/animals', cors(), async (req, res) => {
 //create the POST request
 app.post('/api/animals', cors(), async (req, res) => {
     const newAnimal = { commonname: req.body.commonname, scientificname: req.body.scientificname, 
-        numbersinwild: req.body.numbersinthewild, conservationstatuscode: req.body.conservationstatuscode}
+        numbersinthewild: req.body.numbersinthewild, conservationstatuscode: req.body.conservationstatuscode}
 
      console.log([newAnimal.commonname, newAnimal.scientificname, newAnimal.numbersinthewild, newAnimal.conservationstatuscode]);
 
@@ -77,4 +77,40 @@ app.post('/api/individuals', cors(), async (req, res) => {
 // console.log that your server is up and running
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
+});
+
+app.get('/api/sightings', cors(), async (req, res) => {
+    // const STUDENTS = [
+
+    //     { id: 1, commonname: 'Elephant', scientificname: 'Latinus', numberinthewild: 200},
+    // ];
+    // res.json(endangeredanimals);
+    try{
+        const { rows: sightings2 } = await db.query('SELECT * FROM sightings2');
+        res.send(sightings2);
+      
+    } catch (e){
+        return res.status(400).json({e});
+    }
+
+});
+
+//create the POST request
+app.post('/api/sightings', cors(), async (req, res) => {
+    const newSightings = { datetime: req.body.datetime, individualseen: req.body.individualseen, 
+        locationofsighting: req.body.locationofsighting, healthy: req.body.healthy}
+
+     console.log([newSightings.datetime, newSightings.individualseen, newSightings.locationofsighting, newSightings.healthy]);
+
+    const result = await db.query(
+        'INSERT INTO sightings2(datetime, individualseen, locationofsighting, healthy) VALUES($1, $2, $3, $4) RETURNING *',
+        [newSightings.datetime, newSightings.individualseen, newSightings.locationofsighting, newSightings.healthy]
+    )    
+    const joined =   await db.query(
+       'SELECT individuals.nickname FROM individuals INNER JOIN sightings2 ON individuals.id = sightings2.id'   
+    );
+    console.log(result.rows[0]);
+    res.json(result.rows[0]);
+    res.send(joined)
+    // console.log(nicknameJoin.rows[0])
 });

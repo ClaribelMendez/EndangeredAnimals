@@ -1,14 +1,14 @@
 import './App.css';
 import Animals from './components/animals';
-import Individuals from './components/individuals';
+import Sightings from './components/Sightings';
 
 
 function App() {
   return (
     <div className="App">
-      ENDANGERED ANIMALS
+      <h1>ENDANGERED ANIMALS</h1>
       <Animals />
-      <Individuals />
+      <Sightings />
     </div>
   );
 }

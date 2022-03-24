@@ -1,7 +1,7 @@
 .App {
   text-align: center;
 }
-
+/*
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -35,4 +35,42 @@
   to {
     transform: rotate(360deg);
   }
+} */
+body {
+  background-color: #155263;
+  color: black;
+}
+
+.animals {
+  display: inline-block;
+  /* float: left */
+  margin-right: 50px;
+  
+}
+
+li {
+  list-style: none
+}
+
+
+
+
+
+form {
+  width: 75%;
+  height: 85px;
+  /* display: block; */
+  display: flex;
+  flex-wrap: wrap;
+  align-items:center;
+  padding: 70px;
+  padding-top: 50px;
+  background-color: #ff6f3c;
+  color: black ;
+  float: right;
+  justify-content: center;
+}
+
+button {
+  background-color: #ffc93c
 }

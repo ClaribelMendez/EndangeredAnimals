@@ -1,108 +1,111 @@
 import { useState } from "react";
 
 const Form = (props) => {
-    const [animal, setAnimal] = useState({
-        commonname: "",
-        scientificname: "",
-        numbersinthewild: "",
-        conservationstatuscode: ""
-        // timestamp ***make sure to add these***
+    const [sighting, setSighting] = useState({
+        // datetime: 12/12/12,
+        individualseen: "",
+        locationofsighting: "",
+        healthy: true,
+        emailaddressofsighter: "",
+        // creationtime: 12/12/12,
     
     });
 
+    // const dropdown = [1,2,3]
+
     //create functions that handle the event of the user typing into the form
-    const handleNameChange = (event) => {
-        const commonname = event.target.value;
-        setAnimal((animal) => ({ ...animal, commonname }));
+    // const handleNameChange = (event) => {
+    //     const datetime = event.target.value;
+    //     setSighting((sighting) => ({ ...sighting, datetime }));
 
-    }
+    // }
 
-    const handleScientificNameChange = (event) => {
-        const scientificname = event.target.value;
-        setAnimal((animal) => ({ ...animal, scientificname }));
-
-    }
-
-
-    const handleNumbersInTheWildChange = (event) => {
-        const numbersinthewild = event.target.value;
-        setAnimal((animal) => ({ ...animal, numbersinthewild }));
+    const handleindividualseenChange = (event) => {
+        const individualseen = event.target.value;
+        setSighting((sighting) => ({ ...sighting, individualseen }));
 
     }
 
 
-    const handleConservationStatusChange = (event) => {
-        const conservationstatuscode = event.target.value;
-        setAnimal((animal) => ({ ...animal, conservationstatuscode }));
+    const handlelocationofsightingChange = (event) => {
+        const locationofsighting = event.target.value;
+        setSighting((sighting) => ({ ...sighting, locationofsighting }));
 
     }
+
+
+    // const handleConservationStatusChange = (event) => {
+    //     const healthy = event.target.value;
+    //     setSighting((sighting) => ({ ...sighting, healthy }));
+
+    // }
 
     //A function to handle the post request
-    const postAnimal = async (newAnimal) => {
-        const response = await fetch('http://localhost:4002/api/animals', {
+    const postSighting = async (newSighting) => {
+        const response = await fetch('http://localhost:4002/api/sightings', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newAnimal)
+            body: JSON.stringify(newSighting)
         });
         const data = await response.json();
         console.log("From the post ", data);
-        props.addAnimal(data);
+        props.addSighting(data);
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         let resetState = {
-            commonname: "",
-            scientificname: "",
-            numbersinthewild: "",
-            conservationstatuscode: ""
+            // datetime: "",
+            individualseen: "",
+            locationofsighting: "",
+            healthy: ""
         }
         e.preventDefault();
-        postAnimal(animal);
-        setAnimal(animal)
-        setAnimal(resetState)
+        await postSighting(sighting);
+        // setSighting(sighting)
+        setSighting(resetState)
         
     };
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <fieldset>
-                <label>Common Name</label>
-                <input
-                    type="text"
-                    id="add-commonname"
-                    placeholder="Common Name"
-                    required
-                    value={animal.commonname}
-                    onChange={handleNameChange}
 
-                />
-                <label>Scientific Name</label>
-                <input
-                    type="text"
-                    id="add-scientificname"
-                    placeholder="Scientific Name"
-                    required
-                    value={animal.scientificname}
-                    onChange={handleScientificNameChange}
-                />
-                     <label> Numbers In Wild </label>
+
+    return (
+        <form 
+        className=" right"
+        onSubmit={handleSubmit}>
+            <fieldset>
+                {/* <label>Date / Time</label>
                 <input
                     type="number"
-                    id="add-numbersinthewild"
-                    placeholder="Numbers In The Wild"
-                    // required
-                    value={animal.numbersinthewild}
-                    onChange={handleNumbersInTheWildChange}
-                />
-                     <label>Conservation Status Code</label>
+                    id="add-datetime"
+                    placeholder="ex: 3/22/22 12:00:00"
+                    required
+                    value={sighting.datetime}
+                    onChange={handleNameChange}
+
+                /> */}
+                <label>Individual Seen</label>
                 <input
                     type="text"
-                    id="add-conservationstatuscode"
-                    placeholder="Conservation Status Code"
-                    // required
-                    value={animal.conservationstatuscode}
-                    onChange={handleConservationStatusChange}
+                    id="add-individualseen"
+                    placeholder="ex: Gigantus"
+                    required
+                    value={sighting.individualseen}
+                    onChange={handleindividualseenChange}
                 />
+                     <label> Location of Sighting </label>
+                <input
+                    type="text"
+                    id="add-locationofsighting"
+                    placeholder = "ex: nyc"
+                    // required
+                    value={sighting.locationofsighting}
+                    onChange={handlelocationofsightingChange}
+                />
+                     {/* <label>Healthy or Not</label>
+                     <select>
+         <option value={setSighting}></option>
+          </select> */}
+
             </fieldset>
             <button type="submit">Add</button>
         </form>
