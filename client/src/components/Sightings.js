@@ -34,7 +34,7 @@ function Sightings() {
         <h2> List of sightings </h2>
         <ul>
             {sighting.map(sighting =>
-                <li key={sighting.id}> {sighting.individualseen} {sighting.healthy}</li>)}
+                <li key={sighting.id}> {sighting.individualseen} {sighting.healthy} {sighting.locationofsighting} {sighting.datetime} </li>)}
         </ul>
         <Form addSighting={addSighting} />
       </div>

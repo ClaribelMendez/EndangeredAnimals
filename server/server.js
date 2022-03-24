@@ -92,6 +92,12 @@ app.get('/api/sightings', cors(), async (req, res) => {
     } catch (e){
         return res.status(400).json({e});
     }
+    // const joined =   await db.query(
+    //     'SELECT individuals.nickname FROM individuals INNER JOIN sightings2 ON individuals.id = sightings2.id'
+
+    //     );
+    //     console.log(joined)
+
 
 });
 
@@ -106,11 +112,10 @@ app.post('/api/sightings', cors(), async (req, res) => {
         'INSERT INTO sightings2(datetime, individualseen, locationofsighting, healthy) VALUES($1, $2, $3, $4) RETURNING *',
         [newSightings.datetime, newSightings.individualseen, newSightings.locationofsighting, newSightings.healthy]
     )    
-    const joined =   await db.query(
-       'SELECT individuals.nickname FROM individuals INNER JOIN sightings2 ON individuals.id = sightings2.id'   
-    );
+    // const joined =   await db.query(
+        // 'SELECT individuals.nickname FROM individuals INNER JOIN sightings2 ON individuals.id = sightings2.id'   
+    //  );
     console.log(result.rows[0]);
     res.json(result.rows[0]);
-    res.send(joined)
-    // console.log(nicknameJoin.rows[0])
+// console.log(joined)    // console.log(result.rows[0])
 });
