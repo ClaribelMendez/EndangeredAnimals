@@ -103,19 +103,22 @@ app.get('/api/sightings', cors(), async (req, res) => {
 
 //create the POST request
 app.post('/api/sightings', cors(), async (req, res) => {
-    const newSightings = { datetime: req.body.datetime, individualseen: req.body.individualseen, 
-        locationofsighting: req.body.locationofsighting, healthy: req.body.healthy}
+    const newSightings = { datetime: req.body.datetime, individualnickname: req.body.individualnickname, 
+        locationofsighting: req.body.locationofsighting, emailaddresssighter: req.body.emailaddressofsighter}
 
-     console.log([newSightings.datetime, newSightings.individualseen, newSightings.locationofsighting, newSightings.healthy]);
+     console.log([newSightings.datetime, newSightings.individualnickname, newSightings.locationofsighting,  newSightings.emailaddressofsighter]);
 
-    const result = await db.query(
-        'INSERT INTO sightings2(datetime, individualseen, locationofsighting, healthy) VALUES($1, $2, $3, $4) RETURNING *',
-        [newSightings.datetime, newSightings.individualseen, newSightings.locationofsighting, newSightings.healthy]
-    )    
-    // const joined =   await db.query(
-        // 'SELECT individuals.nickname FROM individuals INNER JOIN sightings2 ON individuals.id = sightings2.id'   
-    //  );
-    console.log(result.rows[0]);
-    res.json(result.rows[0]);
+     const result = await db.query(
+        "INSERT INTO sightings2 (datetime, individualnickname, locationofsighting, , emailaddressofsighter, creationtimestamp) VALUES($1, $2, $3, $4, $5, current_timestamp) RETURNING *",
+        [
+          newSightings.datetime,
+          newSightings.individualnickname,
+          newSightings.locationofsighting,
+        //   newSightings.healthy,
+          newSightings.emailaddressofsighter,
+        ]
+      );
+      console.log(result.rows[0]);
+      res.json(result.rows[0]);
+    });
 // console.log(joined)    // console.log(result.rows[0])
-});

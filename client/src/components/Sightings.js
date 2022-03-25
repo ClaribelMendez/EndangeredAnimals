@@ -27,14 +27,20 @@ function Sightings() {
         // postSighting(newSighting);
         setSighting((sighting) => [...sighting, newSighting]);
     }
-
+    // function boolToStr(input) {
+    //     if (input === true) {
+    //       return "healthy";
+    //     } else if (input === false) {
+    //       return "not healthy";
+    //     }
+    //   }
 
     return (
       <div className="sighting">
         <h2> List of sightings </h2>
         <ul>
             {sighting.map(sighting =>
-                <li key={sighting.id}> {sighting.individualseen} {sighting.healthy} {sighting.locationofsighting} {sighting.datetime} </li>)}
+                <li key={sighting.id}> {sighting.individualnickname} {sighting.locationofsighting} {sighting.datetime} </li>)}
         </ul>
         <Form addSighting={addSighting} />
       </div>

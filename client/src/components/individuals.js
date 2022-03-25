@@ -1,8 +1,6 @@
-
-   
 import { useState, useEffect } from "react";
 
-const Individualsform = (prop) => {
+const IndividualsDropDown = (prop) => {
   const [individuals, setIndividuals] = useState([]);
 
   useEffect(() => {
@@ -13,11 +11,10 @@ const Individualsform = (prop) => {
       });
   }, []);
 
-  //Listing Individuals
   return (
     <div>
       <label>Individuals</label>
-      <select className="dropdowns" onChange={prop.handleIndividualNickName} required>
+      <select classname="dropdowns" onChange={prop.handleIndividualNickName} required>
         <option hidden>Select</option>
         {individuals.map((individual) => (
           <option value={individual.nickname} key={individual.id}>
@@ -28,4 +25,5 @@ const Individualsform = (prop) => {
     </div>
   );
 };
-export default Individualsform;
+
+export default IndividualsDropDown;

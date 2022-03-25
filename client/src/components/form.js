@@ -1,13 +1,14 @@
 import { useState } from "react";
+import Individualsform from "./individualsform";
 
 const Form = (props) => {
     const [sighting, setSighting] = useState({
-        datetime: '',
-        individualseen: "",
+        datetime: "",
+        // individualseen: "",
         locationofsighting: "",
-        healthy: 'healthy = Boolean',
         emailaddressofsighter: "",
-        creationtime: '',
+        // healthy: "",
+        creationtimestamp: '',
     
     });
 
@@ -20,11 +21,11 @@ const Form = (props) => {
 
     }
 
-    const handleindividualseenChange = (event) => {
-        const individualseen = event.target.value;
-        setSighting((sighting) => ({ ...sighting, individualseen }));
-
-    }
+    // const handleIndividualNickName = (event) => {
+    //     const individualnickname = event.target.value;
+    //     setSighting((sighting) => ({ ...sighting, individualnickname }));
+    //     console.log(sighting);
+    //   };
 
 
     const handlelocationofsightingChange = (event) => {
@@ -33,18 +34,26 @@ const Form = (props) => {
 
     }
 
-    const handlehealthy = (event) => {
-        const healthy = event.target.value;
-        setSighting((sighting) => ({ ...sighting, healthy }));
+    // const handlehealthy = (event) => {
+    //     const healthy = strToBool(event.target.value);
+    //     setSighting((sighting) => ({ ...sighting, healthy }));
 
-    }
+    // }
 
 
     const handlecreationtime = (event) => {
-        const creationtime = event.target.value;
-        setSighting((sighting) => ({ ...sighting, creationtime }));
+        const creationtimestamp = event.target.value;
+        setSighting((sighting) => ({ ...sighting, creationtimestamp }));
 
     }
+
+    // function strToBool(input) {
+    //     if (input === true) {
+    //       return "healthy";
+    //     } else if (input === false) {
+    //       return "not healthy";
+    //     }
+    //   }
 
     //A function to handle the post request
     const postSighting = async (newSighting) => {
@@ -61,10 +70,10 @@ const Form = (props) => {
     const handleSubmit = async (e) => {
         let resetState = {
             datetime: "",
-            individualseen: "",
+            // individualseen: "",
             locationofsighting: "",
-            healthy: true,
-            creationtime: '',
+            // healthy: "",
+            creationtime: "",
 
         }
         e.preventDefault();
@@ -81,6 +90,10 @@ const Form = (props) => {
         className=" right"
         onSubmit={handleSubmit}>
             <fieldset>
+            <Individualsform
+        //   handleIndividualNickName={handleIndividualNickName}
+        //   onChange={handleIndividualNickName}
+        />
                 <label>Date / Time</label>
                 <input
                     type="datetime-local"
@@ -91,15 +104,14 @@ const Form = (props) => {
                     onChange={handledatetime}
 
                 />
-                <label>Individual Seen</label>
-                <input
+                {/* <label>Individual Seen</label> */}
+                {/* <input
                     type="text"
                     id="add-individualseen"
                     placeholder="nickname"
-                    required
                     value={sighting.individualseen}
-                    onChange={handleindividualseenChange}
-                />
+                    onChange={handleIndividualNickName}
+                /> */}
                      <label> Location of Sighting </label>
                 <input
                     type="text"
@@ -109,20 +121,20 @@ const Form = (props) => {
                     value={sighting.locationofsighting}
                     onChange={handlelocationofsightingChange}
                 />
-                     <label>Healthy or Not</label>
+                     {/* <label>Healthy or Not</label>
                      <select name = 'healthy' onChange ={handlehealthy}>
-                        <option value='TRUE'>TRUE</option>
-                        <option value='FALSE'>FALSE</option>
+                        <option value='true'>TRUE</option>
+                        <option value='false'>FALSE</option>
             
 
-                    </select>
+                    </select> */}
                     <label>Record Creation time</label>
                 <input
                     type="datetime-local"
                     id="add-creationtime"
                     placeholder="0"
                     required
-                    value={sighting.creationtime}
+                    value={sighting.creationtimestamp}
                     onChange={handlecreationtime}
                 />
             </fieldset>
@@ -131,4 +143,4 @@ const Form = (props) => {
     );
 };
 
-export default Form;
+export default Form
