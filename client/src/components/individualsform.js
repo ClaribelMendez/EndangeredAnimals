@@ -6,7 +6,7 @@ const Individualsform = (prop) => {
   const [individuals, setIndividuals] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:4002/api/individuals`)
+    fetch(`http://localhost:4003/api/individuals`)
       .then((response) => response.json())
       .then((individuals) => {
         setIndividuals(individuals);

@@ -6,7 +6,7 @@ function Sightings() {
     const [sighting, setSighting] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:4002/api/sightings")
+        fetch("http://localhost:4003/api/sightings")
         .then((response) => response.json())
         .then(sighting =>{
             //setAnials((animals[3]));

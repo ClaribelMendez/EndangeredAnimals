@@ -6,7 +6,7 @@ function Animals() {
     const [animals, setAnimals] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:4002/api/animals")
+        fetch("http://localhost:4003/api/animals")
         .then((response) => response.json())
         .then(animals =>{
             //setAnials((animals[3]));

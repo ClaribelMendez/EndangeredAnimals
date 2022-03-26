@@ -4,7 +4,7 @@ import Individualsform from "./individualsform";
 const Form = (props) => {
     const [sighting, setSighting] = useState({
         datetime: "",
-        // individualseen: "",
+        individualnickname: "",
         locationofsighting: "",
         emailaddressofsighter: "",
         // healthy: "",
@@ -21,11 +21,11 @@ const Form = (props) => {
 
     }
 
-    // const handleIndividualNickName = (event) => {
-    //     const individualnickname = event.target.value;
-    //     setSighting((sighting) => ({ ...sighting, individualnickname }));
-    //     console.log(sighting);
-    //   };
+    const handleIndividualNickName = (event) => {
+        const individualnickname = event.target.value;
+        setSighting((sighting) => ({ ...sighting, individualnickname }));
+        console.log(sighting);
+      };
 
 
     const handlelocationofsightingChange = (event) => {
@@ -57,7 +57,7 @@ const Form = (props) => {
 
     //A function to handle the post request
     const postSighting = async (newSighting) => {
-        const response = await fetch('http://localhost:4002/api/sightings', {
+        const response = await fetch('http://localhost:4003/api/sightings', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newSighting)
@@ -70,7 +70,7 @@ const Form = (props) => {
     const handleSubmit = async (e) => {
         let resetState = {
             datetime: "",
-            // individualseen: "",
+            individualnickname: "",
             locationofsighting: "",
             // healthy: "",
             creationtime: "",
@@ -91,7 +91,7 @@ const Form = (props) => {
         onSubmit={handleSubmit}>
             <fieldset>
             <Individualsform
-        //   handleIndividualNickName={handleIndividualNickName}
+          handleIndividualNickName={handleIndividualNickName}
         //   onChange={handleIndividualNickName}
         />
                 <label>Date / Time</label>
@@ -104,14 +104,14 @@ const Form = (props) => {
                     onChange={handledatetime}
 
                 />
-                {/* <label>Individual Seen</label> */}
-                {/* <input
+                <label>Individual Seen</label> 
+                <input
                     type="text"
                     id="add-individualseen"
                     placeholder="nickname"
-                    value={sighting.individualseen}
+                    value={sighting.individualnickname}
                     onChange={handleIndividualNickName}
-                /> */}
+                />
                      <label> Location of Sighting </label>
                 <input
                     type="text"
@@ -126,7 +126,6 @@ const Form = (props) => {
                         <option value='true'>TRUE</option>
                         <option value='false'>FALSE</option>
             
-
                     </select> */}
                     <label>Record Creation time</label>
                 <input

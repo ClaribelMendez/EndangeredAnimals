@@ -57,14 +57,14 @@ li {
 
 
 form {
-  width: 75%;
+  width: 100%;
   height: 85px;
   /* display: block; */
   display: flex;
   flex-wrap: wrap;
   align-items:center;
   padding: 70px;
-  padding-top: 50px;
+  padding-left: 10px;
   background-color: #ff6f3c;
   color: black ;
   float: right;

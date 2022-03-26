@@ -5,7 +5,7 @@ const db = require('../server/db/db-connection.js');
 
 const app = express();
 
-const PORT = 4002;
+const PORT = 4003;
 app.use(cors());
 app.use(express.json());
 
@@ -104,18 +104,19 @@ app.get('/api/sightings', cors(), async (req, res) => {
 //create the POST request
 app.post('/api/sightings', cors(), async (req, res) => {
     const newSightings = { datetime: req.body.datetime, individualnickname: req.body.individualnickname, 
-        locationofsighting: req.body.locationofsighting, emailaddresssighter: req.body.emailaddressofsighter}
+        locationofsighting: req.body.locationofsighting, emailaddresssighter: req.body.emailaddressofsighter, creationtimestamp: req.body.creationtimestamp}
 
      console.log([newSightings.datetime, newSightings.individualnickname, newSightings.locationofsighting,  newSightings.emailaddressofsighter]);
 
      const result = await db.query(
-        "INSERT INTO sightings2 (datetime, individualnickname, locationofsighting, , emailaddressofsighter, creationtimestamp) VALUES($1, $2, $3, $4, $5, current_timestamp) RETURNING *",
+        "INSERT INTO sightings2 (datetime, individualnickname, locationofsighting,  creationtimestamp) VALUES($1, $2, $3, $4) RETURNING *",
         [
           newSightings.datetime,
           newSightings.individualnickname,
           newSightings.locationofsighting,
         //   newSightings.healthy,
-          newSightings.emailaddressofsighter,
+        //   newSightings.emailaddressofsighter,
+        newSightings.creationtimestamp
         ]
       );
       console.log(result.rows[0]);
